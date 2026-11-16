@@ -39,6 +39,7 @@ Volume 9, Issue 2, 117-173. https://doi.org/10.1016/S0747-7171(08)80027-2.
 | [Types module](http://www.doc.ic.ac.uk/~ajf/haskelltests/integration/Types.hs) | `src/Types.hs` |
 | [Examples](http://www.doc.ic.ac.uk/~ajf/haskelltests/integration/Examples.hs) | `src/Examples.hs` |
 | [Utilities](http://www.doc.ic.ac.uk/~ajf/haskelltests/integration/Utilities.hs) | `src/Utilities.hs` |
+| Int.hs (not linked from the page; from the server folder) | `src/Int.hs` |
 | (written for this repo) | `test/Tests.hs`, `test/IC/Exact.hs` |
 
 ## How to run
@@ -59,5 +60,5 @@ No test files were published for this test, so `test/Tests.hs` was written from 
 ## Notes on the packaging
 
 - `Utilities.hs` got a type signature for `crs` and an unreachable `[]` case in `collapse`, so it builds without warnings.
-- **The original template `Int.hs` isn't published on the website** (only `Types.hs`, `Examples.hs` and `Utilities.hs` are). `src/Int.hs` is a reconstruction from the spec: the required functions are given as signatures with `undefined` bodies, plus the helpers the spec says are "defined in the template" (`toExpr`, `isConstant`, `simplifiedDiff`, `printDiff`, `simplifiedInt`, `printInt`, and the optional `applyICR` signature).
+- The template `src/Int.hs` is unchanged. The page doesn't link it, but it is in the test's folder on the server: <http://www.doc.ic.ac.uk/~ajf/haskelltests/integration/Int.hs>.
 - The original test suite used in the exam (the spec mentions given tests) isn't published either.

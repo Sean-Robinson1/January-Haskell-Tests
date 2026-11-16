@@ -51,5 +51,5 @@ cabal test
 
 - No test files were published for any of these tests. All test suites were written from the examples in the specs and the example data in the templates, and the expected values are copied from the spec. Where the spec says an order is unimportant, results are put in a canonical order before they are compared. See each README for details.
 - Templates without a `module` line got a one-line `module X where` header so they can be built as library modules. Given helper code (example data, pretty-printers, utilities) also got missing type signatures and a few small fixes so it builds without compiler warnings. Code the student has to write was left alone, so the stubs `applySub` (2011) and `composeTransitions` (2012) still warn about missing signatures.
-- 2024 (Symbolic Integration): the template `Int.hs` isn't published, so `src/Int.hs` is a reconstruction from the spec (signatures with `undefined` bodies, plus the helpers the spec says the template provides).
+- 2024 (Symbolic Integration): the page doesn't link the template `Int.hs`, but it is in the test's folder on the server, and `src/Int.hs` is that file, unchanged.
 - Specs and templates are (c) Imperial College London / Tony Field and are included here for personal practice only.
