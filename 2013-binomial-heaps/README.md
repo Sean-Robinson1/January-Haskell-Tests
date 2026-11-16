@@ -37,5 +37,5 @@ No test files were published for this test, so `test/Tests.hs` was written from 
 
 ## Notes on the packaging
 
-- Added a `module BinomialHeaps where` header (the original template has none) so it can be built as a library module; the rest of the file is unchanged.
+- Added a `module BinomialHeaps where` header (the original template has none) so it can be built as a library module; the rest of the file is unchanged apart from layout.
 - The spec calls the first accessor `value`, but the template names it `key` (the template also declares `remove` and `removeMin`, which the spec doesn't mention). The tests follow the template.

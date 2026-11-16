@@ -104,16 +104,13 @@ canon (Node bv ns) = Node bv (map canonSub ns)
     canonSub term        = term
 
 trieSize :: Trie -> Int
-trieSize t
-  = sumTrie (const 1) length t
+trieSize t = sumTrie (const 1) length t
 
 binCount :: Trie -> Int
-binCount t
-  = sumTrie (const 1) (const 1) t
+binCount t = sumTrie (const 1) (const 1) t
 
 meanBinSize :: Trie -> Double
-meanBinSize t
-  = fromIntegral (trieSize t) / fromIntegral (binCount t)
+meanBinSize t = fromIntegral (trieSize t) / fromIntegral (binCount t)
 
 numberedTests :: [Assertion] -> [TestTree]
 numberedTests = zipWith (\n -> testCase ("#" ++ show n)) ([1..] :: [Integer])

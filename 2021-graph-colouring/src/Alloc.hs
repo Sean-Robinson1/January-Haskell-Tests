@@ -11,52 +11,43 @@ import Examples
 -- Part I
 --
 count :: Eq a => a -> [a] -> Int
-count 
-  = undefined
+count = undefined
 
 degrees :: Eq a => Graph a -> [(a, Int)]
-degrees 
-  = undefined
+degrees = undefined
 
 neighbours :: Eq a => a -> Graph a -> [a]
-neighbours 
-  = undefined
+neighbours = undefined
 
 removeNode :: Eq a => a -> Graph a -> Graph a
-removeNode 
-  = undefined
+removeNode = undefined
 
 ------------------------------------------------------
 --
 -- Part II
 --
 colourGraph :: (Ord a, Show a) => Int -> Graph a -> Colouring a
-colourGraph 
-  = undefined
+colourGraph = undefined
 
 ------------------------------------------------------
 --
 -- Part III
 --
 buildIdMap :: Colouring Id -> IdMap
-buildIdMap 
-  = undefined
+buildIdMap = undefined
 
 buildArgAssignments :: [Id] -> IdMap -> [Statement]
-buildArgAssignments 
-  = undefined
+buildArgAssignments = undefined
 
 renameExp :: Exp -> IdMap -> Exp
 -- Pre: A precondition is that every variable referenced in 
 -- the expression is in the idMap. 
-renameExp 
-  = undefined
+renameExp = undefined
 
 renameBlock :: Block -> IdMap -> Block
 -- Pre: A precondition is that every variable referenced in 
 -- the block is in the idMap. 
-renameBlock 
-  = undefined
+renameBlock = undefined
 
 renameFun :: Function -> IdMap -> Function
 renameFun (f, as, b) idMap
@@ -67,17 +58,14 @@ renameFun (f, as, b) idMap
 -- Part IV
 --
 buildIG :: [[Id]] -> IG
-buildIG 
-  = undefined
+buildIG = undefined
 
 -----------------------------------------------------
 --
 -- Part V
 --
 liveVars :: CFG -> [[Id]]
-liveVars 
-  = undefined
+liveVars = undefined
 
 buildCFG :: Function -> CFG
-buildCFG 
-  = undefined
+buildCFG = undefined

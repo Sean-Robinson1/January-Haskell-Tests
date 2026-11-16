@@ -8,15 +8,12 @@ import qualified Data.Text.IO as TextIO
 import qualified Data.Map as Map
  
 synonyms :: String -> [String]
-synonyms s
-  = lookUp s thesaurus 
+synonyms s = lookUp s thesaurus
   where
-    lookUp x t
-      = fromMaybe [] (Map.lookup x t)
+    lookUp x t = fromMaybe [] (Map.lookup x t)
 
 thesaurus :: Map.Map String [String]
-thesaurus
-  = unsafePerformIO $ 
+thesaurus = unsafePerformIO $
     do 
       ls <- fmap Text.lines (TextIO.readFile "thesaurus.txt")
       return (Map.fromList (fmap (readSyns . Text.unpack) ls))
@@ -30,8 +27,7 @@ readSyns = read
 ------------------------------------------
 
 linkWords :: [String]
-linkWords
-  = ["","and","and","became","becomes","for","from","getting","give",
+linkWords = ["","and","and","became","becomes","for","from","getting","give",
      "gives","got from","in","is","made by","makes","of","or",
      "provides","providing","show","that is","thats","to","to get",
      "to give","to make a","with"]
@@ -94,8 +90,7 @@ reversalIndicators
      "turn","turned","turning","turns","up","upending"]
 
 insertionIndicators :: [String]
-insertionIndicators
-  = ["admitted to","amidst","amidst","amongst","amongst",
+insertionIndicators = ["admitted to","amidst","amidst","amongst","amongst",
      "between","carried in by","entered","entering","enters",
      "featured in","filled","filling","fills","hidden in","in",
      "included in","inherent in","inside","inside","internal to",
@@ -133,8 +128,7 @@ beforeIndicators
      "needing","next to","on","over","takes","to","with"]
 
 afterIndicators :: [String]
-afterIndicators
-  = ["after","behind","follows","following","opposite"]
+afterIndicators = ["after","behind","follows","following","opposite"]
 
 hiddenWordIndicators :: [String]
 hiddenWordIndicators

@@ -61,7 +61,7 @@ toExpr n = P [(n, 0)]
 
 isConstant :: Expr -> Bool
 isConstant (P [(_, 0)]) = True
-isConstant _ = False
+isConstant _            = False
 
 simplifiedDiff :: Expr -> Expr
 simplifiedDiff = simplify . diffE

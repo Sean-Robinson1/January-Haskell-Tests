@@ -41,4 +41,4 @@ No test files were published for this test, so `test/Tests.hs` was written from 
 
 ## Notes on the packaging
 
-- Added a `module TypeInference where` header (the original template has none) so it can be built as a library module; the rest of the file is unchanged.
+- Added a `module TypeInference where` header (the original template has none) so it can be built as a library module; the rest of the file is unchanged apart from layout.

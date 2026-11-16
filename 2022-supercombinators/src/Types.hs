@@ -33,36 +33,30 @@ rep :: Int -> a -> [a]
 rep = replicate
 
 putExp :: Exp -> IO ()
-putExp 
-  = putStrLn . showE
+putExp = putStrLn . showE
 
 showE :: Exp -> String
-showE e
-  = showE' e ""
+showE e = showE' e ""
 
 showE' :: Exp -> String -> String
-showE' (Const c) s 
-  = s ++ show c
-showE' (Var v) s 
-  = s ++ v
+showE' (Const c) s = s ++ show c
+showE' (Var v) s   = s ++ v
 showE' (App (Var "ite") [p, q, r]) s 
   = showE' p (s ++ "if ") ++ "\n" ++ rep n ' ' ++ "then\n" ++
     showE' q (rep (n + 2) ' ') ++ "\n" ++ rep n ' ' ++ "else\n" ++
     showE' r (rep (n + 2) ' ')
   where
     n = length s
-showE' (Fun as e) s
-  = showE' e (s ++ "Fun " ++ unwords as ++ " -> ")
+showE' (Fun as e) s = showE' e (s ++ "Fun " ++ unwords as ++ " -> ")
 showE' (App f es) s 
   = foldl g (showE' f (s ++ makeStr f "(") ++ makeStr f ")") es 
   where
     makeStr (Var _) _ = ""
-    makeStr _ s = s
+    makeStr _ s       = s
     g s e@(Const _) = showE' e (s ++ " ")
-    g s e@(Var _) = showE' e (s ++ " ")
-    g s e = showE' e (s ++ " (") ++ ")"
-showE' (Let bs e) s 
-  = s ++ "let\n" ++ intercalate "\n" (map g bs) ++
+    g s e@(Var _)   = showE' e (s ++ " ")
+    g s e           = showE' e (s ++ " (") ++ ")"
+showE' (Let bs e) s = s ++ "let\n" ++ intercalate "\n" (map g bs) ++
     "\n" ++ showE' e (rep n ' ' ++ "in ")
   where
     g (v, Fun as e) = showF as e (rep (n + 2) ' ' ++ v)

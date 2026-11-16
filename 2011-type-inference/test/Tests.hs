@@ -45,8 +45,7 @@ occursTests = [ occurs "x" (TVar "y") --> False
               ]
 
 inferTypeTests :: [Assertion]
-inferTypeTests
-  = [ inferType e env --> t
+inferTypeTests = [ inferType e env --> t
     | (e, t) <- [ (ex1, type1), (ex2, type2), (ex3, type3), (ex4, type4)
                 , (ex5, type5), (ex6, type6), (ex7, type7), (ex8, type8) ] ] ++
     -- Section 2.1 / Figure 1 worked example, with env [("x",TInt),("y",TInt)]

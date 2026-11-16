@@ -11,9 +11,9 @@ import Data.Maybe
 
 showToken :: Token -> String
 showToken (Ident v) = v
-showToken (Nat v) = show v
-showToken WhileTok = "while"
-showToken t = [head [c | (c, t') <- tokenTable, t == t']]
+showToken (Nat v)   = show v
+showToken WhileTok  = "while"
+showToken t         = [head [c | (c, t') <- tokenTable, t == t']]
 
 printParse :: String -> IO ()
 printParse input = either printError printOK (parse input)
@@ -36,7 +36,7 @@ printParse input = either printError printOK (parse input)
 -- Given...
 mHead :: [a] -> Maybe a
 mHead (x : _) = Just x
-mHead _ = Nothing
+mHead _       = Nothing
 
 checkTok :: Token -> [Token] -> Either Error [Token]
 checkTok = undefined

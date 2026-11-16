@@ -5,16 +5,14 @@ import Clues
 
 -- Parses whose parse trees correspond to Figure 1
 figParses :: [Parse]
-figParses
-  = [(["new"],[],Reversal ["revolves"] (Synonym "toaster")),
+figParses = [(["new"],[],Reversal ["revolves"] (Synonym "toaster")),
      (["new"],[],Charade [] (Synonym "toaster") (Synonym "revolves")),
      (["revolves"],[],Anagram ["new"] "toaster"),
      (["revolves"],[],Charade [] (Synonym "new") (Synonym "toaster"))]
 
 -- The 'correct' parse trees and parses for the first 19 clues.
 trees :: [ParseTree]
-trees
-  = [Synonym "worry",
+trees = [Synonym "worry",
      Anagram ["new"] "toaster",
      Anagram ["unusual"] "hensdark",
      Anagram ["meandering"] "stream",
@@ -39,8 +37,7 @@ trees
      Reversal ["about"] (Charade [] (Synonym "deep") (Synonym "south"))]
 
 parses :: [Parse]
-parses
-  = zipWith (\(def, link) t -> (def, link, t))
+parses = zipWith (\(def, link) t -> (def, link, t))
             [(["business"], []),
              (["revolves"], []),
              (["bird"], []),
@@ -63,15 +60,13 @@ parses
             trees
 
 enumerations :: [Int]
-enumerations  
-  = [7,7,8,6,4,6,7,9,7,5,5,6,9,5,6,5,10,7,5,6,4,5,4]
+enumerations = [7,7,8,6,4,6,7,9,7,5,5,6,9,5,6,5,10,7,5,6,4,5,4]
 
 -- For the first 19 clues the first element should match 
 -- the corresponding tree in trees above; the second should not.
 -- The rest are used to test Part IV.
 strings :: [(String, String)]
-strings
-  = [("concern","mystery"),
+strings = [("concern","mystery"),
      ("rotates","serator"),
      ("redshank","redstart"),
      ("master","matter"),

@@ -19,16 +19,11 @@ data Type = TInt |
           deriving (Eq, Show)
 
 showT :: Type -> String
-showT TInt  
-  = "Int"
-showT TBool 
-  = "Bool"
-showT (TFun t t') 
-  = "(" ++ showT t ++ " -> " ++ showT t' ++ ")"
-showT (TVar a) 
-  = a
-showT TErr  
-  = "Type error"
+showT TInt        = "Int"
+showT TBool       = "Bool"
+showT (TFun t t') = "(" ++ showT t ++ " -> " ++ showT t' ++ ")"
+showT (TVar a)    = a
+showT TErr        = "Type error"
 
 type TypeTable = [(String, Type)]
 
@@ -40,8 +35,7 @@ type Sub
 
 -- Built-in function types...
 primTypes :: TypeTable
-primTypes 
-  = [("+", TFun TInt (TFun TInt TInt)),
+primTypes = [("+", TFun TInt (TFun TInt TInt)),
      (">", TFun TInt (TFun TInt TBool)),
      ("==", TFun TInt (TFun TInt TBool)),
      ("not", TFun TBool TBool)]
@@ -51,21 +45,17 @@ primTypes
 
 -- Pre: The search item is in the table
 lookUp :: Eq a => a -> [(a, b)] -> b
-lookUp 
-  = undefined
+lookUp = undefined
 
 tryToLookUp :: Eq a => a -> b -> [(a, b)] -> b
-tryToLookUp 
-  = undefined
+tryToLookUp = undefined
 
 -- Pre: The given value is in the table
 reverseLookUp :: Eq b => b -> [(a, b)] -> [a]
-reverseLookUp 
-  = undefined
+reverseLookUp = undefined
 
 occurs :: String -> Type -> Bool
-occurs 
-  = undefined
+occurs = undefined
 
 ------------------------------------------------------
 -- PART II
@@ -74,45 +64,37 @@ occurs
 -- Pre: All variables in the expression have a binding in the given 
 --      type environment
 inferType :: Expr -> TEnv -> Type
-inferType
-  = undefined
+inferType = undefined
 
 ------------------------------------------------------
 -- PART III
 
-applySub
-  = undefined
+applySub = undefined
 
 unify :: Type -> Type -> Maybe Sub
-unify t t'
-  = unifyPairs [(t, t')] []
+unify t t' = unifyPairs [(t, t')] []
 
 unifyPairs :: [(Type, Type)] -> Sub -> Maybe Sub
-unifyPairs
-  = undefined
+unifyPairs = undefined
 
 ------------------------------------------------------
 -- PART IV
 
 updateTEnv :: TEnv -> Sub -> TEnv
-updateTEnv tenv tsub
-  = map modify tenv
+updateTEnv tenv tsub = map modify tenv
   where
     modify (v, t) = (v, applySub tsub t)
 
 combine :: Sub -> Sub -> Sub
-combine sNew sOld
-  = sNew ++ updateTEnv sOld sNew
+combine sNew sOld = sNew ++ updateTEnv sOld sNew
 
 -- In combineSubs [s1, s2,..., sn], s1 should be the *most recent* substitution
 -- and will be applied *last*
 combineSubs :: [Sub] -> Sub
-combineSubs 
-  = foldr1 combine
+combineSubs = foldr1 combine
 
 inferPolyType :: Expr -> Type
-inferPolyType
-  = undefined
+inferPolyType = undefined
 
 -- You may optionally wish to use one of the following helper function declarations
 -- as suggested in the specification. 

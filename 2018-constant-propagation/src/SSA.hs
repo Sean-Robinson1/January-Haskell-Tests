@@ -24,13 +24,11 @@ data Op = Add | Mul | Eq | Gtr
 -- Given functions to support the interpreter...
 
 lookUp :: (Eq a, Show a) => a -> [(a, b)] -> b
-lookUp i table
-  = fromMaybe (error ("lookup failed on identifier: " ++ show i)) 
+lookUp i table = fromMaybe (error ("lookup failed on identifier: " ++ show i))
               (lookup i table) 
 
 execFun :: Function -> [Int] -> State
-execFun (name, args, p) vs
-  = execBlock p (zip args vs)
+execFun (name, args, p) vs = execBlock p (zip args vs)
 
 ------------------------------------------------------------------------
 -- Part I
@@ -38,47 +36,39 @@ execFun (name, args, p) vs
 type State = [(Id, Int)]
 
 update :: (Id, Int) -> State -> State
-update 
-  = undefined
+update = undefined
 
 apply :: Op -> Int -> Int -> Int
-apply 
-  = undefined
+apply = undefined
 
 eval :: Exp -> State -> Int
 -- Pre: the variables in the expression will all be bound in the given state 
 -- Pre: expressions do not contain phi instructions
-eval 
-  = undefined
+eval = undefined
 
 execStatement :: Statement -> State -> State
-execStatement 
-  = undefined
+execStatement = undefined
 
 execBlock :: Block -> State -> State
-execBlock 
-  = undefined
+execBlock = undefined
 
 ------------------------------------------------------------------------
 -- Given function for testing propagateConstants...
 
 -- Converts a function in SSA form into its optimised SSA form...
 applyPropagate :: Function -> Function
-applyPropagate (name, args, body)
-  = (name, args, propagateConstants body)
+applyPropagate (name, args, body) = (name, args, propagateConstants body)
 
 ------------------------------------------------------------------------
 -- PART II
 
 foldConst :: Exp -> Exp
 -- Pre: the expression is in SSA form
-foldConst 
-  = undefined
+foldConst = undefined
 
 sub :: Id -> Int -> Exp -> Exp
 -- Pre: the expression is in SSA form
-sub 
-  = undefined
+sub = undefined
 
 -- Use (by uncommenting) any of the following, as you see fit...
 -- type Worklist = [(Id, Int)]
@@ -87,65 +77,53 @@ sub
  
 propagateConstants :: Block -> Block
 -- Pre: the block is in SSA form
-propagateConstants 
-  = undefined
+propagateConstants = undefined
 
 ------------------------------------------------------------------------
 -- Given functions for testing unPhi...
 
 -- Applies unPhi to a given function...
 applyUnPhi :: Function -> Function
-applyUnPhi (name, args, body)
-  = (name, args, unPhi body)
+applyUnPhi (name, args, body) = (name, args, unPhi body)
 
 -- Combines propagation/folding and unPhi to convert a function from its
 -- unoptimised SSA form to a final non-SSA form...
 optimise :: Function -> Function
-optimise (name, args, body)
-  = (name, args, unPhi (propagateConstants body))
+optimise (name, args, body) = (name, args, unPhi (propagateConstants body))
 
 ------------------------------------------------------------------------
 -- PART III
 
 unPhi :: Block -> Block
 -- Pre: the block is in SSA form
-unPhi 
-  = undefined
+unPhi = undefined
 
 ------------------------------------------------------------------------
 -- Part IV
 
 makeSSA :: Function -> Function
-makeSSA 
-  = undefined
+makeSSA = undefined
 
 
 ------------------------------------------------------------------------
 -- Predefined functions for displaying functions and blocks...
 
 opNames :: [(Op, String)]
-opNames
-  = [(Add, "+"), (Mul, "*"), (Eq, "=="), (Gtr, ">")]
+opNames = [(Add, "+"), (Mul, "*"), (Eq, "=="), (Gtr, ">")]
 
 precTable :: [(Op, Int)]
-precTable
-  = [(Add, 1), (Mul, 2), (Eq, 0), (Gtr, 0)]
+precTable = [(Add, 1), (Mul, 2), (Eq, 0), (Gtr, 0)]
 
 prec :: Op -> Int
-prec op
-  = lookUp op precTable
+prec op = lookUp op precTable
 
 showArgs :: [String] -> String
-showArgs [] 
-  = ""
-showArgs as
-  = foldr1 (\a s -> a ++ (", " ++ s)) as
+showArgs [] = ""
+showArgs as = foldr1 (\a s -> a ++ (", " ++ s)) as
 
 showExp :: Int -> Exp -> String
-showExp _ (Const n) 
-  = show n
-showExp _ (Var id) 
-  = id
+showExp _ (Const n) = show n
+showExp _ (Var id)  = id
 showExp n (Apply op' e e') 
   | n > n'    = "(" ++ s ++ ")"
   | otherwise = s
@@ -153,55 +131,52 @@ showExp n (Apply op' e e')
     n' = prec op'
     s = showExp n' e ++ " " ++ fromJust (lookup op' opNames ) ++ " " ++ 
         showExp n' e'
-showExp _ (Phi e e')
-  = "PHI(" ++ showArgs (map (showExp 0) [e, e']) ++ ")"
+showExp _ (Phi e e') = "PHI(" ++ showArgs (map (showExp 0) [e, e']) ++ ")"
 
 showLine :: Show a => String -> a -> Int -> IO ()
 showLine s n k
   =  putStrLn (show n ++ ": " ++ replicate (k + 2 - length (show n)) ' ' ++ s)
 
 showBlock' :: Block -> Int -> IO Int
-showBlock' b n
-  = showBlock'' b n 2
+showBlock' b n = showBlock'' b n 2
   where
     showBlock'' :: Block -> Int -> Int -> IO Int
-    showBlock'' [] n k
-      = return n
-    showBlock'' (s : b) n k
-      = do n'  <- showStatement s n k
-           n'' <- showBlock'' b n' k
-           return n''
-    showStatement (Assign id e) n k
-      = do showLine (id ++ " = " ++ showExp 0 e) n k
-           return (n + 1)
-    showStatement (If p q []) n k
-      = do showLine ("if " ++ "(" ++ showExp 0 p ++ ") {") n k
-           n' <- showBlock'' q (n + 1) (k + 2)
-           showLine "}" n' k 
-           return (n' + 1)
-    showStatement (If p q r) n k
-      = do showLine ("if " ++ "(" ++ showExp 0 p ++ ") {") n k
-           n'  <- showBlock'' q (n + 1) (k + 2)
-           showLine "} else {" n' k 
-           n'' <- showBlock'' r (n' + 1) (k + 2)
-           showLine "}" n'' k
-           return (n'' + 1)
-    showStatement (DoWhile b p) n k
-      = do showLine "do {" n k
-           n' <- showBlock'' b (n + 1) (k + 2)
-           showLine ("} while " ++ showExp 9 p) n' k
-           return (n' + 1)
+    showBlock'' [] n k = return n
+    showBlock'' (s : b) n k = do
+      n'  <- showStatement s n k
+      n'' <- showBlock'' b n' k
+      return n''
+    showStatement (Assign id e) n k = do
+      showLine (id ++ " = " ++ showExp 0 e) n k
+      return (n + 1)
+    showStatement (If p q []) n k = do
+      showLine ("if " ++ "(" ++ showExp 0 p ++ ") {") n k
+      n' <- showBlock'' q (n + 1) (k + 2)
+      showLine "}" n' k 
+      return (n' + 1)
+    showStatement (If p q r) n k = do
+      showLine ("if " ++ "(" ++ showExp 0 p ++ ") {") n k
+      n'  <- showBlock'' q (n + 1) (k + 2)
+      showLine "} else {" n' k 
+      n'' <- showBlock'' r (n' + 1) (k + 2)
+      showLine "}" n'' k
+      return (n'' + 1)
+    showStatement (DoWhile b p) n k = do
+      showLine "do {" n k
+      n' <- showBlock'' b (n + 1) (k + 2)
+      showLine ("} while " ++ showExp 9 p) n' k
+      return (n' + 1)
 
 showFun :: Function -> IO()
-showFun (name, args, body)
-  = do putStrLn ("1:  " ++ name ++ "(" ++ showArgs args ++ ") {")
-       n <- showBlock' body 2
-       showLine "}" n 0
+showFun (name, args, body) = do
+  putStrLn ("1:  " ++ name ++ "(" ++ showArgs args ++ ") {")
+  n <- showBlock' body 2
+  showLine "}" n 0
 
 showBlock ::  Block -> IO()
-showBlock b
-  = do n <- showBlock' b 1
-       return ()
+showBlock b = do
+  n <- showBlock' b 1
+  return ()
 
 ------------------------------------------------------------------------
 -- Example state and expressions for testing...
@@ -221,8 +196,7 @@ e5 = Apply Add (Var "a") (Var "x")
 
 -- Figure 1...
 example :: Function
-example 
-  = ("example",["x"],[Assign "a" (Const 1),Assign "b" (Apply Add (Var "x")
+example = ("example",["x"],[Assign "a" (Const 1),Assign "b" (Apply Add (Var "x")
     (Const 2)),Assign "c" (Const 3),If (Apply Eq (Var "x") (Const 10)) 
     [Assign "a" (Const 1),Assign "c" (Const 5)] [],Assign "d" 
     (Apply Add (Var "a") (Const 3)),Assign "e" (Apply Add (Var "d") (Var "b")),
@@ -254,8 +228,7 @@ exampleOptimised
 
 -- Figure 2 (there is no SSA version of this)...
 fact :: Function
-fact 
-  = ("fact", 
+fact = ("fact",
      ["n"], 
      [If (Apply Eq (Var "n") (Const 0))
         [Assign "$return" (Const 1)]
@@ -274,8 +247,7 @@ fact
 
 -- Summation loop, specialised loop for the case k=0...
 loop :: Function
-loop 
-  = ("loop",["n"],[Assign "i" (Var "n"),Assign "k" (Const 0),Assign "sum"
+loop = ("loop",["n"],[Assign "i" (Var "n"),Assign "k" (Const 0),Assign "sum"
     (Const 0),If (Apply Eq (Var "i") (Const 0)) [Assign "$return" (Const 0)]
     [DoWhile [Assign "sum" (Apply Add (Var "sum") (Apply Mul (Apply Add 
     (Var "i") (Apply Mul (Const 2) (Var "k"))) (Apply Add (Apply Add (Var "i") 
@@ -331,13 +303,11 @@ basicBlockSSA
     3)),Assign "$return" (Var "y1")])
     
 basicBlockSSAPropagated :: Function
-basicBlockSSAPropagated
-  = ("basicBlock", [], [Assign "$return" (Const 9)])
+basicBlockSSAPropagated = ("basicBlock", [], [Assign "$return" (Const 9)])
 
 -- (This is the same as above, as there were no phi functions.)
 basicBlockOptimised :: Function
-basicBlockOptimised
-  = ("basicBlock", [], [Assign "$return" (Const 9)])
+basicBlockOptimised = ("basicBlock", [], [Assign "$return" (Const 9)])
 
 -- Computes the maximum of two integers; useful for testing unPhi...
 max2 :: Function

@@ -9,62 +9,49 @@ data BinTree a = Node a Int (BinHeap a)
 -- PART I
 
 key :: BinTree a -> a
-key
-  = undefined
+key = undefined
 
 rank :: BinTree a -> Int
-rank
-  = undefined
+rank = undefined
 
 children :: BinTree a -> [BinTree a]
-children
-  = undefined
+children = undefined
 
 combineTrees :: Ord a => BinTree a -> BinTree a -> BinTree a
-combineTrees 
-  = undefined
+combineTrees = undefined
 
 --------------------------------------------------------------
 -- PART II
 
 extractMin :: Ord a => BinHeap a -> a
-extractMin 
-  = undefined
+extractMin = undefined
 
 mergeHeaps :: Ord a => BinHeap a -> BinHeap a -> BinHeap a
-mergeHeaps 
-  = undefined
+mergeHeaps = undefined
 
 insert :: Ord a => a -> BinHeap a -> BinHeap a
-insert 
-  = undefined
+insert = undefined
 
 deleteMin :: Ord a => BinHeap a -> BinHeap a
-deleteMin 
-  = undefined
+deleteMin = undefined
 
 remove :: Eq a => a -> BinHeap a -> BinHeap a
-remove
-  = undefined
+remove = undefined
 
 removeMin :: Ord a => BinHeap a -> (BinTree a, BinHeap a)
-removeMin
-  = undefined
+removeMin = undefined
 
 binSort :: Ord a => [a] -> [a]
-binSort 
-  = undefined
+binSort = undefined
 
 --------------------------------------------------------------
 -- PART III
 
 toBinary :: BinHeap a -> [Int]
-toBinary
-  = undefined
+toBinary = undefined
 
 binarySum :: [Int] -> [Int] -> [Int]
-binarySum
-  = undefined
+binarySum = undefined
 
 ------------------------------------------------------
 -- Some sample trees...

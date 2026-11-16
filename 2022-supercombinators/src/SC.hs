@@ -9,67 +9,55 @@ import Examples
 ---------------------------------------------------------
 
 prims :: [Id]
-prims
-  = ["+", "-", "*", "<=", "ite"]
+prims = ["+", "-", "*", "<=", "ite"]
 
 lookUp :: Id -> [(Id, a)] -> a
-lookUp v env
-  = fromMaybe (error ("lookUp failed with search key " ++ v))
+lookUp v env = fromMaybe (error ("lookUp failed with search key " ++ v))
               (lookup v env)
 
 ---------------------------------------------------------
 -- Part I
 
 isFun :: Exp -> Bool
-isFun 
-  = undefined
+isFun = undefined
 
 splitDefs :: [Binding] -> ([Binding], [Binding])
-splitDefs 
-  = undefined
+splitDefs = undefined
 
 topLevelFunctions :: Exp -> Int
-topLevelFunctions 
-  = undefined
+topLevelFunctions = undefined
 
 ---------------------------------------------------------
 -- Part II
 
 unionAll :: Eq a => [[a]] -> [a]
-unionAll
-  = undefined
+unionAll = undefined
 
 freeVars :: Exp -> [Id]
-freeVars 
-  = undefined
+freeVars = undefined
 
 ---------------------------------------------------------
 -- Part III
 
 -- Given...
 lambdaLift :: Exp -> Exp
-lambdaLift e
-  = lift (modifyFunctions (buildFVMap e) e)
+lambdaLift e = lift (modifyFunctions (buildFVMap e) e)
 
 buildFVMap :: Exp -> [(Id, [Id])]
-buildFVMap 
-  = undefined
+buildFVMap = undefined
 
 modifyFunctions :: [(Id, [Id])] -> Exp -> Exp
 -- Pre: The mapping table contains a binding for every function
 -- named in the expression.
-modifyFunctions 
-  = undefined
+modifyFunctions = undefined
 
 -- The default definition here is id.
 -- If you implement the above two functions but not this one
 -- then lambdaLift above will remove all the free variables
 -- in functions; it just won't do any lifting.
 lift :: Exp -> Exp
-lift 
-  = id
+lift = id
 
 -- You may wish to use this...
 lift' :: Exp -> (Exp, [Supercombinator])
-lift' 
-  = undefined
+lift' = undefined

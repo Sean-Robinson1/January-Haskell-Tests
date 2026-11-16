@@ -48,21 +48,21 @@ instance Pretty Polynomial where
     where p' = filter ((/= 0) . fst) p
 
 instance Pretty Expr where
-  prettys (P p) = prettys p
-  prettys (Add e e') = prettys e
+  prettys (P p)             = prettys p
+  prettys (Add e e')        = prettys e
                      . if c == '-' then " - " . (s' ++) else " + " . (s ++)
     where s@(c : s') = pretty e'
-  prettys (Mul e e') = prettys' e . " . " . prettys' e'
+  prettys (Mul e e')        = prettys' e . " . " . prettys' e'
     where prettys' e@(Add _ _) = "(" . prettys e . ")"
           prettys' e = prettys e
   prettys (Pow e@(P [_]) n) = prettys e . "^" . prettys n
-  prettys (Pow e n) = "(" . prettys e . ")^" . prettys n
-  prettys (Log e@(P p)) = "log" . prettys e
-  prettys (Log e) = "log (" . prettys e . ")"
+  prettys (Pow e n)         = "(" . prettys e . ")^" . prettys n
+  prettys (Log e@(P p))     = "log" . prettys e
+  prettys (Log e)           = "log (" . prettys e . ")"
 
 instance Pretty Term where
-  prettys (a, 0) = prettys a
-  prettys (1 :% 1, n) = prettysPow n
+  prettys (a, 0)       = prettys a
+  prettys (1 :% 1, n)  = prettysPow n
   prettys (-1 :% 1, n) = "-" . prettysPow n
   prettys (a@(0 :% _), n) | n > 0 = ""
   prettys (a, n) = prettys a . prettysPow n
@@ -78,15 +78,15 @@ toExpr n = P [(n, 0)]
 
 isConstant :: Expr -> Bool
 isConstant (P [(_, 0)]) = True
-isConstant _ = False
+isConstant _            = False
 
 isZero :: Expr -> Bool
 isZero (P [(0, 0)]) = True
-isZero _ = False
+isZero _            = False
 
 isOne :: Expr -> Bool
 isOne (P [(1, 0)]) = True
-isOne _ = False
+isOne _            = False
 
 gcd :: Rational -> Rational -> Rational
 gcd r r' = gcd' (abs r) (abs r')
@@ -133,7 +133,7 @@ simplify' (Add e e') = simplify'' (Add (simplify' e) (simplify' e'))
 simplify' (Mul e e') = simplify'' (Mul (simplify' e) (simplify' e'))
 simplify' (Pow e n)  = simplify'' (Pow (simplify' e) n)
 simplify' (Log e)    = simplify'' (Log (simplify' e))
-simplify' e         = e
+simplify' e          = e
 
 normalise :: Polynomial -> Polynomial
 normalise = map collapse . groupBy ((==) `on` snd) . sortOn (Down . snd)
@@ -178,7 +178,7 @@ simplify'' e = e
 
 unP :: Expr -> Polynomial
 unP (P p) = p
-unP e = []
+unP e     = []
 
 biliftA2 :: (a -> b -> c) -> (x -> y -> z) -> (a, x) -> (b, y) -> (c, z)
 biliftA2 f g (u, v) (x, y) = (f u x, g v y)

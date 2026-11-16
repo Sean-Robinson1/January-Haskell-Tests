@@ -32,8 +32,7 @@ xlogx p
     log2 x = log x / log 2
 
 lookUp :: (Eq a, Show a, Show b) => a -> [(a, b)] -> b
-lookUp x table
-  = fromMaybe (error ("lookUp error - no binding for " ++ show x ++ 
+lookUp x table = fromMaybe (error ("lookUp error - no binding for " ++ show x ++
                       " in table: " ++ show table))
               (lookup x table)
 
@@ -42,42 +41,34 @@ lookUp x table
 --------------------------------------------------------------------
 
 allSame :: Eq a => [a] -> Bool
-allSame 
-  = undefined
+allSame = undefined
 
 remove :: Eq a => a -> [(a, b)] -> [(a, b)]
-remove 
-  = undefined
+remove = undefined
 
 lookUpAtt :: AttName -> Header -> Row -> AttValue
 --Pre: The attribute name is present in the given header.
-lookUpAtt
-  = undefined
+lookUpAtt = undefined
 
 removeAtt :: AttName -> Header -> Row -> Row
-removeAtt
-  = undefined
+removeAtt = undefined
 
 addToMapping :: Eq a => (a, b) -> [(a, [b])] -> [(a, [b])]
-addToMapping
-  = undefined
+addToMapping = undefined
 
 buildFrequencyTable :: Attribute -> DataSet -> [(AttValue, Int)]
 --Pre: Each row of the data set contains an instance of the attribute
-buildFrequencyTable
-  = undefined
+buildFrequencyTable = undefined
 
 --------------------------------------------------------------------
 -- PART II
 --------------------------------------------------------------------
 
 nodes :: DecisionTree -> Int
-nodes 
-  = undefined
+nodes = undefined
 
 evalTree :: DecisionTree -> Header -> Row -> AttValue
-evalTree 
-  = undefined
+evalTree = undefined
 
 --------------------------------------------------------------------
 -- PART III
@@ -95,61 +86,48 @@ nextAtt (header, _) (classifierName, _)
   = head (filter ((/= classifierName) . fst) header)
 
 partitionData :: DataSet -> Attribute -> Partition
-partitionData 
-  = undefined
+partitionData = undefined
 
 buildTree :: DataSet -> Attribute -> AttSelector -> DecisionTree 
-buildTree 
-  = undefined
+buildTree = undefined
 
 --------------------------------------------------------------------
 -- PART IV
 --------------------------------------------------------------------
 
 entropy :: DataSet -> Attribute -> Double
-entropy 
-  = undefined
+entropy = undefined
 
 gain :: DataSet -> Attribute -> Attribute -> Double
-gain 
-  = undefined
+gain = undefined
 
 bestGainAtt :: AttSelector
-bestGainAtt 
-  = undefined
+bestGainAtt = undefined
 
 --------------------------------------------------------------------
 
 outlook :: Attribute
-outlook 
-  = ("outlook", ["sunny", "overcast", "rainy"])
+outlook = ("outlook", ["sunny", "overcast", "rainy"])
 
 temp :: Attribute 
-temp 
-  = ("temp", ["hot", "mild", "cool"])
+temp = ("temp", ["hot", "mild", "cool"])
 
 humidity :: Attribute 
-humidity 
-  = ("humidity", ["high", "normal"])
+humidity = ("humidity", ["high", "normal"])
 
 wind :: Attribute 
-wind 
-  = ("wind", ["windy", "calm"])
+wind = ("wind", ["windy", "calm"])
 
 result :: Attribute 
-result
-  = ("result", ["good", "bad"])
+result = ("result", ["good", "bad"])
 
 fishingData :: DataSet
-fishingData
-  = (header, table)
+fishingData = (header, table)
 
 header :: Header
 table  :: [Row]
-header 
-  =  [outlook,    temp,   humidity, wind,    result] 
-table 
-  = [["sunny",    "hot",  "high",   "calm",  "bad" ],
+header = [outlook,    temp,   humidity, wind,    result]
+table = [["sunny",    "hot",  "high",   "calm",  "bad" ],
      ["sunny",    "hot",  "high",   "windy", "bad" ],
      ["overcast", "hot",  "high",   "calm",  "good"],
      ["rainy",    "mild", "high",   "calm",  "good"],
@@ -169,15 +147,12 @@ table
 -- column...
 --
 fishingData' :: DataSet
-fishingData'
-  = (header', table')
+fishingData' = (header', table')
 
 header' :: Header
 table'  :: [Row]
-header' 
-  =  [outlook,    result, temp,   humidity, wind] 
-table' 
-  = [["sunny",    "bad",  "hot",  "high",   "calm"],
+header' = [outlook,    result, temp,   humidity, wind]
+table' = [["sunny",    "bad",  "hot",  "high",   "calm"],
      ["sunny",    "bad",  "hot",  "high",   "windy"],
      ["overcast", "good", "hot",  "high",   "calm"],
      ["rainy",    "good", "mild", "high",   "calm"],
@@ -216,8 +191,7 @@ fig1
                                                           ("calm", Leaf "good")])])])]
 
 fig2 :: DecisionTree
-fig2
-  = Node "outlook" 
+fig2 = Node "outlook"
          [("sunny", Node "humidity" 
                          [("high", Leaf "bad"),
                           ("normal", Leaf "good")]),

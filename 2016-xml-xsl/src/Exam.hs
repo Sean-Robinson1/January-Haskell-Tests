@@ -17,10 +17,8 @@ type Stack = [XML]
 
 -- The 'show' function for XML objects
 showXML :: XML -> String
-showXML Null
-  = ""
-showXML (Text t)
-  = t
+showXML Null     = ""
+showXML (Text t) = t
 showXML (Element n as es)
   = "<" ++ n ++ showAtts as ++ ">" ++ concatMap showXML es ++ "</" ++ n ++ ">"
   where
@@ -29,56 +27,46 @@ showXML (Element n as es)
 
 -- The 'show' function for lists of XML objects
 showXMLs :: [XML] -> String
-showXMLs
-  = concatMap showXML
+showXMLs = concatMap showXML
 
 -- Prints an XML object to the terminal
 printXML :: XML -> IO()
-printXML 
-  = putStrLn . showXML
+printXML = putStrLn . showXML
 
 -- Prints a list of XML objects to the terminal (useful for testing the
 -- output from expandXML')
 printXMLs :: [XML] -> IO()
-printXMLs
-  = mapM_ printXML
+printXMLs = mapM_ printXML
 
 -----------------------------------------------------------------------
 -----------------------------------------------------------------------
 -- Part I
 
 skipSpace :: String -> String
-skipSpace
-  = undefined
+skipSpace = undefined
 
 getAttribute :: String -> XML -> String
-getAttribute 
-  = undefined
+getAttribute = undefined
 
 getChildren :: String -> XML -> [XML]
-getChildren 
-  = undefined
+getChildren = undefined
 
 getChild :: String -> XML -> XML
-getChild 
-  = undefined
+getChild = undefined
 
 addChild :: XML -> XML -> XML
 -- Pre: the second argument is an Element
-addChild 
-  = undefined
+addChild = undefined
 
 getValue :: XML -> XML
-getValue 
-  = undefined
+getValue = undefined
 
 -------------------------------------------------------------------------
 -- Part II
 
 -- Parses an element/attribute name
 parseName :: String -> (Name, String)
-parseName []
-  = error "Error: attempt to read empty name"
+parseName [] = error "Error: attempt to read empty name"
 parseName s@(c : cs)
   | isAlpha c = break (not . isNameChar) s
   | otherwise = error ("parseName error: name " ++ show s ++
@@ -87,32 +75,26 @@ parseName s@(c : cs)
     isNameChar c = isAlpha c || isDigit c || elem c "-."
 
 sentinel :: XML
-sentinel 
-  = Element "" [] []
+sentinel = Element "" [] []
 
 addText :: String -> Stack -> Stack
 -- Pre: There is at least one Element on the stack
-addText 
-  = undefined
+addText = undefined
 
 popAndAdd :: Stack -> Stack
 -- Pre: There are at least two Elements on the stack
-popAndAdd 
-  = undefined
+popAndAdd = undefined
 
 parseAttributes :: String -> (Attributes, String)
 -- Pre: The XML attributes string is well-formed
-parseAttributes 
-  = undefined
+parseAttributes = undefined
 
 parse :: String -> XML
 -- Pre: The XML string is well-formed
-parse s
-  = parse' (skipSpace s) [sentinel]
+parse s = parse' (skipSpace s) [sentinel]
 
 parse' :: String -> Stack -> XML
-parse' 
-  = undefined
+parse' = undefined
 
 -------------------------------------------------------------------------
 -- Part III
@@ -128,30 +110,24 @@ type XSL = XML
 -- To render output.html in a browser, type this at the Linux prompt:
 --   firefox output.html &
 output :: String -> XML -> XML -> IO()
-output file xsl source
-  = writeFile file (showXMLs (expandXSL xsl source))
+output file xsl source = writeFile file (showXMLs (expandXSL xsl source))
 
 expandXSL :: XSL -> XML -> [XML]
-expandXSL xsl source 
-  = expandXSL' root xsl
+expandXSL xsl source = expandXSL' root xsl
   where
     root = Element "/" [] [source] 
 
 expandXSL' :: Context -> XSL -> [XML]
-expandXSL' 
-  = undefined
+expandXSL' = undefined
 
 -------------------------------------------------------------------------
 -- Test data for Parts I and II
 
 -- Simple test cases (no whitespace)
 s1, s2, s3 :: String
-s1
-  = "<a>A</a>"
-s2 
-  = "<a x=\"1\"><b>A</b><b>B</b></a>"
-s3
-  = "<a>\
+s1 = "<a>A</a>"
+s2 = "<a x=\"1\"><b>A</b><b>B</b></a>"
+s3 = "<a>\
       \<b>\
         \<c att=\"att1\">text1</c>\
         \<c att=\"att2\">text2</c>\
@@ -164,15 +140,12 @@ s3
 
 -- Parsed versions of the above
 x1, x2, x3 :: XML
-x1
-  = Element "a" [] [Text "A"]
-x2
-  = Element "a"
+x1 = Element "a" [] [Text "A"]
+x2 = Element "a"
             [("x","1")]
             [Element "b" [] [Text "A"],
              Element "b" [] [Text "B"]]
-x3
-  = Element "a" 
+x3 = Element "a"
             [] 
             [Element "b" 
                      [] 
@@ -197,8 +170,7 @@ casablanca
     \</year>\n</film>\n\n\n"
 
 casablancaParsed :: XML 
-casablancaParsed
-  = Element "film" 
+casablancaParsed = Element "film"
             [("title","Casablanca")] 
             [Text "\n  ",
              Element "director" [] [Text "Michael Curtiz"],
@@ -208,8 +180,7 @@ casablancaParsed
 
 -- Films mark-up of Figure 1
 films :: String
-films
-  = "<filmlist>\n\
+films = "<filmlist>\n\
     \  <film title = \"Rear Window\">\n\
     \    <director>Alfred Hitchcock</director>\n\
     \    <composer>Franz Waxman</composer>\n\
@@ -231,8 +202,7 @@ films
 
 -- Parsed version of films ('parse films'), suitably formatted
 filmsParsed :: XML
-filmsParsed
-  = Element "filmlist" 
+filmsParsed = Element "filmlist"
             [] 
             [Text "\n  ",
              Element "film" [("title","Rear Window")]
@@ -273,66 +243,48 @@ filmsParsed
 -- value-of test cases
 xsl1, xsl2, xsl3, xsl4, xsl5, xsl6, xsl7, 
   xsl8, xsl9 :: String
-xsl1
-  = "<value-of select = \"a/b/c\"></value-of>"
-xsl2
-  = "<value-of select = \"a/b\"></value-of>"
-xsl3
-  = "<value-of select = \"a/b/d\"></value-of>"
-xsl4
-  = "<value-of select = \"a/b/c/@att\"></value-of>"
-xsl5
-  = "<value-of select = \"./a/./b/c/./.\"></value-of>"
+xsl1 = "<value-of select = \"a/b/c\"></value-of>"
+xsl2 = "<value-of select = \"a/b\"></value-of>"
+xsl3 = "<value-of select = \"a/b/d\"></value-of>"
+xsl4 = "<value-of select = \"a/b/c/@att\"></value-of>"
+xsl5 = "<value-of select = \"./a/./b/c/./.\"></value-of>"
 xsl6
   = "<t1><t2>Preamble</t2><t3><value-of select = \"a/b/c\"></value-of></t3></t1>"
 
 -- for-each test cases
-xsl7
-  = "<for-each select=\"a/b/c\"><value-of select=\"./@att\"></value-of>\
-    \</for-each>" 
-xsl8
-  = "<for-each select=\"a/b\"><t><value-of select=\"c\"></value-of></t>\
-    \</for-each>" 
-xsl9
-  = "<for-each select=\"a/b\"><t1><value-of select=\"absent\"></value-of>\
-    \</t1></for-each>"
+xsl7 = "<for-each select=\"a/b/c\"><value-of select=\"./@att\"></value-of>\
+       \</for-each>" 
+xsl8 = "<for-each select=\"a/b\"><t><value-of select=\"c\"></value-of></t>\
+       \</for-each>" 
+xsl9 = "<for-each select=\"a/b\"><t1><value-of select=\"absent\"></value-of>\
+       \</t1></for-each>"
         
 -- Parsed versions of the above
 xsl1Parsed, xsl2Parsed, xsl3Parsed, xsl4Parsed, xsl5Parsed,
   xsl6Parsed, xsl7Parsed, xsl8Parsed, xsl9Parsed :: XML
-xsl1Parsed
-  = Element "value-of" [("select","a/b/c")] []
-xsl2Parsed
-  = Element "value-of" [("select","a/b")] []
-xsl3Parsed
-  = Element "value-of" [("select","a/b/d")] []
-xsl4Parsed
-  = Element "value-of" [("select","a/b/c/@att")] []
-xsl5Parsed
-  = Element "value-of" [("select","./a/./b/c/./.")] []
-xsl6Parsed
-  = Element "t1" 
+xsl1Parsed = Element "value-of" [("select","a/b/c")] []
+xsl2Parsed = Element "value-of" [("select","a/b")] []
+xsl3Parsed = Element "value-of" [("select","a/b/d")] []
+xsl4Parsed = Element "value-of" [("select","a/b/c/@att")] []
+xsl5Parsed = Element "value-of" [("select","./a/./b/c/./.")] []
+xsl6Parsed = Element "t1"
             [] 
             [Element "t2" [] [Text "Preamble"],
              Element "t3" [] [Element "value-of" [("select","a/b/c")] []]]
 
-xsl7Parsed
-  = Element "for-each" 
+xsl7Parsed = Element "for-each"
             [("select","a/b/c")] 
             [Element "value-of" [("select","./@att")] []]
-xsl8Parsed
-  = Element "for-each" 
+xsl8Parsed = Element "for-each"
             [("select","a/b")] 
             [Element "t" [] [Element "value-of" [("select","c")] []]]
-xsl9Parsed
-  = Element "for-each" 
+xsl9Parsed = Element "for-each"
             [("select","a/b")] 
             [Element "t1" [] [Element "value-of" [("select","absent")] []]]
 
 -- XSL template for building a films summary (example from spec.)
 filmsXSL :: String
-filmsXSL
-  = "<html>\n\
+filmsXSL = "<html>\n\
     \<body>\n\
     \  <h2>Film List</h2>\n\
     \  <table border=\"1\">\n\
@@ -354,8 +306,7 @@ filmsXSL
 
 -- XSL template for building a list of composers (example from spec.)
 composersXSL :: String
-composersXSL
-  = "<for-each select=\"filmlist/film\">\
+composersXSL = "<for-each select=\"filmlist/film\">\
       \<h2><value-of select=\"@title\"></value-of> composers</h2>\
       \<ul>\
       \<for-each select=\"composer\">\

@@ -12,35 +12,28 @@ import Examples
 -- Part I
 
 punctuation :: String
-punctuation 
-  = "';.,-!?"
+punctuation = "';.,-!?"
 
 cleanUp :: String -> String
-cleanUp 
-  = undefined
+cleanUp = undefined
 
 split2 :: [a] -> [([a], [a])]
-split2 
-  = undefined
+split2 = undefined
 
 split3 :: [a] -> [([a], [a], [a])]
-split3
-  = undefined
+split3 = undefined
 
 uninsert :: [a] -> [([a], [a])]
-uninsert
-  = undefined
+uninsert = undefined
 
 {- Uncomment these functions when you have defined the above.
 split2M :: [a] -> [([a], [a])]
-split2M xs
-  = sxs ++ [(y, x) | (x, y) <- sxs] 
+split2M xs = sxs ++ [(y, x) | (x, y) <- sxs]
   where
     sxs = split2 xs
 
 split3M :: [a] -> [([a], [a], [a])]
-split3M xs
-  = sxs ++ [(z, y, x) | (x, y, z) <- sxs]
+split3M xs = sxs ++ [(z, y, x) | (x, y, z) <- sxs]
   where
     sxs = split3 xs
 -}
@@ -49,57 +42,46 @@ split3M xs
 -- Part II
 
 matches :: String -> ParseTree -> Bool
-matches
-  = undefined
+matches = undefined
 
 evaluate :: Parse -> Int -> [String]
-evaluate 
-  = undefined
+evaluate = undefined
 
 ------------------------------------------------------
 -- Part III
 
 -- Given...
 parseWordplay :: [String] -> [ParseTree]
-parseWordplay ws
-  = concat [parseSynonym ws,
+parseWordplay ws = concat [parseSynonym ws,
             parseAnagram ws,
             parseReversal ws,
             parseInsertion ws,
             parseCharade ws]
     
 parseSynonym :: [String] -> [ParseTree]
-parseSynonym 
-  = const []
+parseSynonym = const []
 
 parseAnagram :: [String] -> [ParseTree]
-parseAnagram
-  = const []
+parseAnagram = const []
 
 parseReversal :: [String] -> [ParseTree]
-parseReversal
-  = const []
+parseReversal = const []
 
 parseInsertion :: [String] -> [ParseTree]
-parseInsertion
-  = const []
+parseInsertion = const []
 
 parseCharade :: [String] -> [ParseTree]
-parseCharade 
-  = const []
+parseCharade = const []
 
 -- Given...
 parseClue :: Clue -> [Parse]
-parseClue clue@(s, n)
-  = parseClueText (words (cleanUp s))
+parseClue clue@(s, n) = parseClueText (words (cleanUp s))
 
 parseClueText :: [String] -> [Parse]
-parseClueText
-  = undefined
+parseClueText = undefined
 
 solve :: Clue -> [Solution]
-solve 
-  = undefined
+solve = undefined
 
 
 ------------------------------------------------------
@@ -109,14 +91,12 @@ solve
 -- The nub removes duplicate solutions arising from the
 -- charade parsing rule.
 solveAll :: Int -> [[String]]
-solveAll k
-  = map (nub . map getSol . solve . (clues !!)) [0..k-1]
+solveAll k = map (nub . map getSol . solve . (clues !!)) [0..k-1]
 
 getSol :: Solution -> String
 getSol (_, _, sol) = sol
 
 showAll :: IO ()
-showAll
-  = mapM_ (showSolutions . solve . (clues !!)) [0..23]
+showAll = mapM_ (showSolutions . solve . (clues !!)) [0..23]
 
 

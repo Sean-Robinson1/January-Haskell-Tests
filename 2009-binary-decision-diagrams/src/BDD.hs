@@ -20,27 +20,22 @@ type BDD = (NodeId, [BDDNode])
 
 -- Pre: The item is in the given table
 lookUp :: Eq a => a -> [(a, b)] -> b
-lookUp 
-  = undefined
+lookUp = undefined
 
 checkSat :: BDD -> Env -> Bool
-checkSat 
-  = undefined
+checkSat = undefined
 
 sat :: BDD -> [[(Index, Bool)]]
-sat 
-  = undefined
+sat = undefined
 
 ------------------------------------------------------
 -- PART II
 
 simplify :: BExp -> BExp
-simplify 
-  = undefined
+simplify = undefined
 
 restrict :: BExp -> Index -> Bool -> BExp
-restrict 
-  = undefined
+restrict = undefined
 
 ------------------------------------------------------
 -- PART III
@@ -50,14 +45,12 @@ restrict
 -- The question suggests the following definition (in terms of buildBDD')
 -- but you are free to implement the function differently if you wish.
 buildBDD :: BExp -> [Index] -> BDD
-buildBDD 
-  = undefined
+buildBDD = undefined
 
 -- Potential helper function for buildBDD which you are free
 -- to define/modify/ignore/delete/embed as you see fit.
 buildBDD' :: BExp -> NodeId -> [Index] -> BDD
-buildBDD' 
-  = undefined
+buildBDD' = undefined
 
 ------------------------------------------------------
 -- PART IV
@@ -65,8 +58,7 @@ buildBDD'
 -- Pre: Each variable index in the BExp appears exactly once
 --      in the Index list; there are no other elements
 buildROBDD :: BExp -> [Index] -> BDD
-buildROBDD 
-  = undefined
+buildROBDD = undefined
 
 ------------------------------------------------------
 -- Examples for testing...

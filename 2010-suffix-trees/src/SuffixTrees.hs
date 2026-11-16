@@ -6,8 +6,7 @@ data SuffixTree = Leaf Int | Node [(String, SuffixTree)]
 ------------------------------------------------------
 
 isPrefix :: String -> String -> Bool
-isPrefix 
-  = undefined
+isPrefix = undefined
 
 removePrefix :: String -> String -> String
 removePrefix
@@ -15,63 +14,51 @@ removePrefix
   = undefined
 
 suffixes :: [a] -> [[a]]
-suffixes
-  = undefined
+suffixes = undefined
 
 isSubstring :: String -> String -> Bool
-isSubstring
-  = undefined
+isSubstring = undefined
 
 findSubstrings :: String -> String -> [Int]
-findSubstrings
-  = undefined
+findSubstrings = undefined
 
 ------------------------------------------------------
 
 getIndices :: SuffixTree -> [Int]
-getIndices 
-  = undefined
+getIndices = undefined
 
 partition :: Eq a => [a] -> [a] -> ([a], [a], [a])
-partition 
-  = undefined
+partition = undefined
 
 findSubstrings' :: String -> SuffixTree -> [Int]
-findSubstrings'
-  = undefined
+findSubstrings' = undefined
 
 ------------------------------------------------------
 
 insert :: (String, Int) -> SuffixTree -> SuffixTree
-insert 
-  = undefined
+insert = undefined
 
 -- This function is given
 buildTree :: String -> SuffixTree 
-buildTree s
-  = foldl (flip insert) (Node []) (zip (suffixes s) [0..])
+buildTree s = foldl (flip insert) (Node []) (zip (suffixes s) [0..])
 
 ------------------------------------------------------
 -- Part IV
 
 longestRepeatedSubstring :: SuffixTree -> String
-longestRepeatedSubstring 
-  = undefined
+longestRepeatedSubstring = undefined
 
 ------------------------------------------------------
 -- Example strings and suffix trees...
 
 s1 :: String
-s1 
-  = "banana"
+s1 = "banana"
 
 s2 :: String
-s2 
-  = "mississippi"
+s2 = "mississippi"
 
 t1 :: SuffixTree
-t1 
-  = Node [("banana", Leaf 0), 
+t1 = Node [("banana", Leaf 0),
           ("a", Node [("na", Node [("na", Leaf 1), 
                                    ("", Leaf 3)]), 
                      ("", Leaf 5)]), 
@@ -79,8 +66,7 @@ t1
                        ("", Leaf 4)])]
 
 t2 :: SuffixTree
-t2 
-  = Node [("mississippi", Leaf 0), 
+t2 = Node [("mississippi", Leaf 0),
           ("i", Node [("ssi", Node [("ssippi", Leaf 1), 
                                     ("ppi", Leaf 4)]), 
                       ("ppi", Leaf 7), 

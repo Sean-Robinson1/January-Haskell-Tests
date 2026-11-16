@@ -72,8 +72,7 @@ evalTreeTests = [ evalTree fig1 header (table !! 5) --> "bad"
                 ]
 
 partitionDataTests :: [Assertion]
-partitionDataTests
-  = [ partitionData fishingData outlook --> outlookPartition
+partitionDataTests = [ partitionData fishingData outlook --> outlookPartition
     , fst (snd (partitionData fishingData outlook !! 1))
         --> [("temp",["hot","mild","cool"]),("humidity",["high","normal"]),
              ("wind",["windy","calm"]),("result",["good","bad"])]

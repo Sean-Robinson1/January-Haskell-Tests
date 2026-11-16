@@ -60,5 +60,5 @@ No test files were published for this test, so `test/Tests.hs` was written from 
 ## Notes on the packaging
 
 - `Utilities.hs` got a type signature for `crs` and an unreachable `[]` case in `collapse`, so it builds without warnings.
-- The template `src/Int.hs` is unchanged. The page doesn't link it, but it is in the test's folder on the server: <http://www.doc.ic.ac.uk/~ajf/haskelltests/integration/Int.hs>.
+- The template `src/Int.hs` is unchanged apart from layout. The page doesn't link it, but it is in the test's folder on the server: <http://www.doc.ic.ac.uk/~ajf/haskelltests/integration/Int.hs>.
 - The original test suite used in the exam (the spec mentions given tests) isn't published either.

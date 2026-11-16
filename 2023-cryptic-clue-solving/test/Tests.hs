@@ -169,14 +169,12 @@ solutions19
      ["kensington"],["defiant"],["speed"]]
 
 split2M :: [a] -> [([a], [a])]
-split2M xs
-  = sxs ++ [(y, x) | (x, y) <- sxs]
+split2M xs = sxs ++ [(y, x) | (x, y) <- sxs]
   where
     sxs = split2 xs
 
 split3M :: [a] -> [([a], [a], [a])]
-split3M xs
-  = sxs ++ [(z, y, x) | (x, y, z) <- sxs]
+split3M xs = sxs ++ [(z, y, x) | (x, y, z) <- sxs]
   where
     sxs = split3 xs
 
