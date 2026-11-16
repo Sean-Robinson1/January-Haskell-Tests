@@ -1,0 +1,3 @@
+# Keep LF endings (the XML golden files are compared byte for byte)
+* text=auto eol=lf
+*.pdf binary
