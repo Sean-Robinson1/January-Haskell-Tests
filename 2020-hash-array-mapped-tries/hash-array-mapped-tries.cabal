@@ -1,5 +1,5 @@
 cabal-version:      3.0
-name:               hamts
+name:               hash-array-mapped-tries
 version:            0.1.0.0
 synopsis:           Haskell January Test 2020 - Hash Array Mapped Tries
 description:        Practice version of an Imperial College Haskell January Test (Tony Field), packaged as a cabal project.
@@ -23,7 +23,7 @@ library
     -- Directories containing source files.
     hs-source-dirs:   src
 
-test-suite hamts-test
+test-suite hash-array-mapped-tries-test
     import:           common-settings
     -- The interface type and version of the test suite.
     type:             exitcode-stdio-1.0
@@ -32,6 +32,6 @@ test-suite hamts-test
     -- The entrypoint to the test suite.
     main-is:          Tests.hs
     other-modules:    IC.Exact
-    build-depends:    hamts,
+    build-depends:    hash-array-mapped-tries,
                       tasty >=1.1 && <1.6,
                       tasty-hunit >=0.9 && <0.11

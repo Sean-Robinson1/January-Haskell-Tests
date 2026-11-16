@@ -19,7 +19,7 @@ Practice copies of the Imperial College first-year **Haskell January Tests** by 
 | 2017 | [Decision Trees](2017-decision-trees/) | \*\* | Data-set utilities, decision tree evaluation and construction (first attribute, then information gain). |
 | 2018 | [Constant Propagation (SSA)](2018-constant-propagation/) | \*\* | An interpreter, then constant propagation and folding on SSA form, and phi removal. |
 | 2019 | [SAT Solving](2019-sat-solving/) | \* | NNF/CNF conversion, flattening and the Davis-Putnam algorithm (all solutions). |
-| 2020 | [Hash Array Mapped Tries](2020-hamts/) | \* | Bit twiddling with Data.Bits, then membership, insertion and building of HAMTs. |
+| 2020 | [Hash Array Mapped Tries](2020-hash-array-mapped-tries/) | \* | Bit twiddling with Data.Bits, then membership, insertion and building of HAMTs. |
 | 2021 | [Graph Colouring and Register Allocation](2021-graph-colouring/) | \*\* | Graph colouring, variable renaming, interference graphs and (unassessed) liveness and CFG construction. |
 | 2022 | [Supercombinators (Lambda Lifting)](2022-supercombinators/) | \*\*\* | Free variables, then lambda lifting of let-bound functions into supercombinators. |
 | 2023 | [Cryptic Clue Solving](2023-cryptic-clue-solving/) | \* | Parsing and evaluating cryptic crossword clue wordplay with a thesaurus. |

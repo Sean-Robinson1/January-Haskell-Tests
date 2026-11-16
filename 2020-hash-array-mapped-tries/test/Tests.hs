@@ -18,7 +18,7 @@ main :: IO ()
 main = defaultMain tests
 
 tests :: TestTree
-tests = testGroup "hamts"
+tests = testGroup "hash-array-mapped-tries"
   [ testGroup "countOnes" (numberedTests countOnesTests)
   , testGroup "countOnesFrom" (numberedTests countOnesFromTests)
   , testGroup "getIndex" (numberedTests getIndexTests)
